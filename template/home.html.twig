@@ -1,84 +1,87 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Bienvenue sur le Shop !{% endblock %}
+{% block title %}Bienvenue sur le Shop !
+{% endblock %}
 
 {% block content %}
-<div class="container">
-    <p class="text-primary card">
-        Liste des produits :
-    </p>
+	<div class="container">
+		<p class="text-primary card">
+			Liste des produits :
+		</p>
 
-    <div class="row">
-
-
-        <div class="card bg-dark text-light" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Sweatshirt</h5>
-                <p class="card-text">Un sweatshirt bien sympatique en coton vla chaud</p>
-            </div>
-            <ul class="list-group list-group-flush rounded">
-                <li class="list-group-item">Bleu</li>
-                <li class="list-group-item">Rouge</li>
-                <li class="list-group-item">Multicolore</li>
-            </ul>
-        </div>
-
-        <div class="card bg-dark text-light" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Souris</h5>
-                <p class="card-text">Une souris sans fil ergonomique avec la masse de batterie</p>
-            </div>
-            <ul class="list-group list-group-flush rounded">
-                <li class="list-group-item">Bleu</li>
-                <li class="list-group-item">Rouge</li>
-                <li class="list-group-item">Multicolore</li>
-                <li class="list-group-item">Noire</li>
-            </ul>
-        </div>
-
-    </div>
-
-    {% for product in products %}
-
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <div class="col-md-4">
-                    {% if product.image %}
-                    <img src="uploads/{{ product.image }}" class="img-fluid rounded-start" alt="...">
-                    {% else %}
-                    <img src="https://fakeimg.pl/350x200/?text=Image" class="img-fluid rounded-start" 
-                   alt="...">
-                    {% endif %}
-                   </div>
-            </div>
-
-            <div class="col-md-6 d-flex align-items-center">
-                <div class="card-body">
-                    {% for category in categories %}
-                        {% if category.id == product.idCategory %}
-                            <p class="card-text">{{category.label}} </p>
-                        {% endif %}
-                    {% endfor %}
-                    <h5 class="card-title">{{product.label}}</h5>
-                    <p class="card-text">{{product.description}}</p>
-
-                    <a href="?page=showProduct&product={{ product.id }}" class="btn btn-primary">Voir le produit</a>
-                    <a href="?page=updateProduct&product={{ product.id }}" class="btn btn-primary">Modifier le produit</a>
-                    <a href="?page=deleteProduct&product={{ product.id }}" class="btn btn-primary">Supprimer le produit</a>
-                </div>
-            </div>
-
-            <div class="col-md-2 d-flex align-items-center">
-                <div class="card-body d-flex justify-content-center">
-                    <h5 class="text-primary">{{product.price}}</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% endfor %}
+		<div class="row">
 
 
-</div>
+			<div class="card bg-dark text-light" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Sweatshirt</h5>
+					<p class="card-text">Un sweatshirt bien sympatique en coton vla chaud</p>
+				</div>
+				<ul class="list-group list-group-flush rounded">
+					<li class="list-group-item">Bleu</li>
+					<li class="list-group-item">Rouge</li>
+					<li class="list-group-item">Multicolore</li>
+				</ul>
+			</div>
+
+			<div class="card bg-dark text-light" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Souris</h5>
+					<p class="card-text">Une souris sans fil ergonomique avec la masse de batterie</p>
+				</div>
+				<ul class="list-group list-group-flush rounded">
+					<li class="list-group-item">Bleu</li>
+					<li class="list-group-item">Rouge</li>
+					<li class="list-group-item">Multicolore</li>
+					<li class="list-group-item">Noire</li>
+				</ul>
+			</div>
+
+		</div>
+
+		{% for product in products %}
+
+			<div class="card mb-3">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<div class="col-md-4">
+							{% if product.image %}
+								<img src="uploads/{{ product.image }}" class="img-fluid rounded-start" alt="...">
+							{% else %}
+								<img src="https://fakeimg.pl/350x200/?text=Image" class="img-fluid rounded-start" alt="...">
+							{% endif %}
+						</div>
+					</div>
+
+					<div class="col-md-6 d-flex align-items-center">
+						<div class="card-body">
+							{% for category in categories %}
+								{% if category.id == product.idCategory %}
+									<p class="card-text">{{category.label}}
+									</p>
+								{% endif %}
+							{% endfor %}
+							<h5 class="card-title">{{product.label}}</h5>
+							<p class="card-text">{{product.description}}</p>
+
+							<form action="?page=addPanier&product={{ product.id }}" method="post">
+								<input type="number" name="addPanierQuant" style="width:50px" class="form-label" value="1">
+								<input type="submit" value="Ajouter au Panier" class="btn btn-primary">
+							</form>
+
+						</div>
+					</div>
+
+					<div class="col-md-2 d-flex align-items-center">
+						<div class="card-body d-flex justify-content-center">
+							<h5 class="text-primary">{{product.price}}</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+
+
+	</div>
 {% endblock %}

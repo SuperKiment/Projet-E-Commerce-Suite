@@ -1,0 +1,59 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Panier
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="col-12">
+			<h1 class="mb-5">Panier de
+				{{session.auth.login}}
+			</h1>
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Libellé</th>
+						<th scope="col">Quantité</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for panier in paniers %}
+
+						<tr>
+							<th>{{panier.product.label}}</th>
+							<td>{{panier.quantity}}</td>
+							<td>{{panier.product.price}}€</td>
+
+							<td>
+								<a href="?page=showProduct&product={{ panier.product.id }}" class="btn btn-primary">Voir le produit</a>
+								<a href="?page=showPanier&delProduct={{ panier.product.id }}" class="btn btn-danger">Supprimer le produit</a>
+							</td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<div class="card p-1">
+				<p>Prix :</p>
+				<p>
+					{% set price = 0 %}
+
+					{% for panier in paniers %}
+						{% set panierPrix = panier.product.price * panier.quantity %}
+						{% set price = price + panierPrix %}
+					{% endfor %}
+
+					{{price}}
+				</p>
+			</div>
+		</div>
+
+		<a href="?page=passerCommande" class="btn btn-primary">Passer Commande</a>
+
+	</div>
+{% endblock %}

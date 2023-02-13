@@ -14,6 +14,11 @@ $routes = [
     'showProduct' => 'showProductController:1',
     'adminProducts' => 'adminProductsController:2',
 
+    'addPanier' => 'addPanierController:0',
+    'showPanier' => 'showPanierController:1',
+    'passerCommande' => 'passerCommandeController:1',
+    'adminCommandes' => 'adminCommandesController:2',
+
     'addUser' => 'addUserController:2',
     'deleteUser' => 'deleteUserController:2',
     'showUser' => 'showUserController:2',

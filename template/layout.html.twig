@@ -46,7 +46,8 @@
                                 <li><a class="dropdown-item" href="?page=adminProducts">Gérer les Produits</a></li>
                                 <li><a class="dropdown-item" href="?page=adminProductCategories">Gérer les Catégories</a></li>
                                 <li><a class="dropdown-item" href="?page=adminUsers">Gérer les Utilisateurs</a></li>
-                            </ul>
+                                <li><a class="dropdown-item" href="?page=adminCommandes">Gérer les Commandes</a></li>
+                                </ul>
                         </div>
                     </li>
                     {% endif %}
@@ -58,7 +59,7 @@
                                 {{ session.auth.login }}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Mon panier (0)</a></li>
+                                <li><a class="dropdown-item" href="?page=showPanier">Mon panier (0)</a></li>
                                 <li><a class="dropdown-item text-danger" href="?page=logout">Deconnexion</a></li>
                             </ul>
                         </div>

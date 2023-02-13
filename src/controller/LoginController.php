@@ -29,6 +29,7 @@ function loginController($twig, $db)
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['auth']['login'] = $user['email'];
                     $_SESSION['auth']['role'] = $user['idRole'];
+                    $_SESSION['auth']['id'] = $user['id'];
                     $form = [
                         'state' => 'success',
                         'message' => "Connexion réussie !"

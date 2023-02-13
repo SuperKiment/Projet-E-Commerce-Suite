@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Gestion des Commandes
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1>Gestion des Commandes</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Utilisateur</th>
+					<th scope="col">Date de Commande</th>
+					<th scope="col">Clôturer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for commande in commandes %}
+
+					<tr {% if commande.cloture == 1 %} class="bg-light" {% endif %}>
+						<th scope="row">{{commande.id}}</th>
+						{% for user in users %}
+							{% if user.id == commande.idUser %}
+								<td>{{user.email}}</td>
+							{% endif %}
+						{% endfor %}
+						<td>{{commande.dateC}}</td>
+						{% if commande.cloture == 1 %}
+							<td>
+								<a href="?page=adminCommandes&decloture={{commande.id}}&user={{commande.idUser}}" class="btn btn-danger">Déclôturer</a>
+							</td>
+
+						{% else %}
+							<td>
+								<a href="?page=adminCommandes&cloture={{commande.id}}&user={{commande.idUser}}" class="btn btn-primary">Clôturer</a>
+							</td>
+						{% endif %}
+					</tr>
+
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
