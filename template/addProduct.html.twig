@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<form class="container" action="index.php?page=addProduct" method="POST" enctype="multipart/form-data">
+    <h1> Add Product </h1>
+
+    <div class="card px-3 bg-light" style="width: 25rem;">
+
+        {% if form.state == "success" %}
+        <div style="color: green;">{{form.message}} </div>
+        {% endif %}
+        {% if form.state == "danger" %}
+        <div style="color: red;">{{form.message}} </div>
+        {% endif %}
+
+        <label for="productLabel">Label</label>
+        <input type="text" class="card" name="productLabel" id="productLabel">
+
+        <label for="productDescription">Description</label>
+        <textarea type="text" class="card" name="productDescription" id="productDescription" height="5"></textarea>
+
+        <label for="productPrice">Prix</label>
+        <input type="number" name="productPrice" id="productPrice">
+
+        <label for="productCategory">Catégorie</label>
+
+        <select name="productCategory" id="productCategory" class="form-select">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.label}}</option>
+
+            {% endfor %}
+        </select>
+
+        <div class="mb-3">
+            <label for="productImage" class="form-label">Image</label>
+            <input type="file" class="form-control" id="productImage" name="productImage">
+        </div>
+
+
+        <br>
+        <input type="submit" value="Submit" style="width: 5rem;" class="bg-success text-light" name="btnPostProduct">
+    </div>
+</form>
+{% endblock %}

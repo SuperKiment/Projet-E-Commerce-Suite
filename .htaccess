@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    #Active la réécriture d'url
+    RewriteEngine On
+    #On change l'url vers le htaccess public
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

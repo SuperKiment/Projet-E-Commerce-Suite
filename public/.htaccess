@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    #Active la réécriture d'url
+    RewriteEngine On
+    #Si on request pas un dossier ou un fichier alors on renvoie vers l'index
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

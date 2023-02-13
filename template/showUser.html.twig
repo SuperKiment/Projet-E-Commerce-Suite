@@ -1,0 +1,77 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Fiche d'utilisateur{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% if user %}
+    <div class="col-12">
+        <h1 class="mb-5">{{ user.prenom }} {{ user.nom }}</h1>
+        <p>{{user.email}} </p>
+
+        <p>{% for role in roles %}
+            {% if user.idRole == role.id %}
+            {{role.label}}
+            {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+
+    <div>
+        <h2>Modifier :</h2>
+
+        <form action="?page=showUser&user={{user.id}}" method="post">
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">E-mail</th>
+                        <td>{{user.email}}</td>
+                        <td><input type="email" name="modEmail" value="{{user.email}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Nom</th>
+                        <td>{{user.nom}}</td>
+                        <td><input type="label" name="modNom" value="{{user.nom}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Prénom</th>
+                        <td>{{user.prenom}}</td>
+                        <td><input type="label" name="modPrenom" value="{{user.prenom}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Rôle</th>
+                        <td>{% for role in roles %}
+                            {% if user.idRole == role.id %}
+                            {{role.label}}
+                            {% endif %}
+                            {% endfor %}</td>
+                        <td>
+                            <select name="modRole">
+                                {% for role in roles %}
+                                <option value="{{role.id}}" {% if user.idRole==role.id %} selected {% endif %}>
+                                    {{role.label}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <p><input type="password" name="modPass" placeholder="Mot de Passe"></p>
+            <p><input type="password" name="modPassVerif" placeholder="Confirmer"></p>
+
+            <input type="submit" value="Modifier" name="modSubmit" class="btn btn-primary">
+        </form>
+    </div>
+    {% else %}
+    <p>L'utilisateur n'existe pas !</p>
+    {% endif %}
+</div>
+
+{% endblock %}

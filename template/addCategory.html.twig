@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Add Category{% endblock %}
+
+{% block content %}
+<form class="container" action="index.php?page=addCategory" method="POST">
+    <h1> Add Category </h1>
+
+    <div class="card px-3 bg-light" style="width: 25rem;">
+
+        {% if form.state == "success" %}
+        <div style="color: green;">{{form.message}} </div>
+        {% endif %}
+        {% if form.state == "danger" %}
+        <div style="color: red;">{{form.message}} </div>
+        {% endif %}
+
+        <label for="categoryLabel">Label</label>
+        <input type="text" class="card" name="categoryLabel" id="categoryLabel">
+
+        <br>
+        <input type="submit" value="Submit" style="width: 5rem;" class="bg-success text-light" name="btnAddCategory">
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Gestion des produits{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Gestion des produits</h1>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <a href="?page=addProduct" class="btn btn-success">Ajouter un Produit</a>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Libellé</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+
+
+      <tr>
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.label}}</td>
+        <td>{{product.price}}</td>
+
+        {% for category in categories %}
+        {% if product.idCategory == category.id %}
+        <td>{{category.label}}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td><a href="?page=showProduct&product={{ product.id }}" class="btn btn-primary">Voir le produit</a>
+          <a href="?page=updateProduct&product={{ product.id }}" class="btn btn-primary">Modifier le produit</a>
+          <a href="?page=deleteProduct&product={{ product.id }}" class="btn btn-danger">Supprimer le produit</a>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

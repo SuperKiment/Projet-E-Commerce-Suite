@@ -1,0 +1,53 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Gestion des produits{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Gestion des utilisateurs</h1>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <a href="?page=addUser" class="btn btn-success">Ajouter un Utilisateur</a>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Rôle</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+
+
+      <tr>
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.email}}</td>
+        <td>{{user.nom}}</td>
+        <td>{{user.prenom}}</td>
+
+        {% for role in roles %}
+        {% if user.idRole == role.id %}
+        <td>{{role.label}}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td><a href="?page=showUser&user={{ user.id }}" class="btn btn-primary">Voir l'utilisateur</a>
+          <a href="?page=updateUser&user={{ user.id }}" class="btn btn-primary">Modifier l'utilisateur</a>
+          <a href="?page=deleteUser&user={{ user.id }}" class="btn btn-danger">Supprimer l'utilisateur</a>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

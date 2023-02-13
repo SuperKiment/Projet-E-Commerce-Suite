@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - {% block title %}{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="?page=home">Shop</a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mb-2 mb-log-0">
+                    <li class="nav-item"><a href="?page=home" class="nav-link">Accueil</a></li>
+
+                    <li class="nav-item"><a href="?page=mentionsLegales" class="nav-link">Mentions Légales</a></li>
+
+                    <li class="nav-item"><a href="?page=contact" class="nav-link">Contact</a></li>
+
+                    <li class="nav-item"><a href="?page=about" class="nav-link">About</a></li>
+
+                    {% if session.auth is defined %}
+                    {% if session.auth.role == 2 %}
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle nav-link bg-dark border-dark" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="?page=adminProducts">Gérer les Produits</a></li>
+                                <li><a class="dropdown-item" href="?page=adminProductCategories">Gérer les Catégories</a></li>
+                                <li><a class="dropdown-item" href="?page=adminUsers">Gérer les Utilisateurs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle nav-link bg-dark border-dark" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session.auth.login }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="">Mon panier (0)</a></li>
+                                <li><a class="dropdown-item text-danger" href="?page=logout">Deconnexion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a href="?page=register" class="btn ms-2 text-light">S'inscrire</a></li>
+                    <li class="nav-item"><a href="?page=login" class="btn btn-success ms-2">Se connecter</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-light rounded px-5 px-4 mb-5">
+        <div class="container">
+            <h1>Bienvenue sur la boutique !</h1>
+            <p class="lead text-muted">
+                Achetez et payez, chers péons
+            </p>
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <br>
+    <br>
+    <br>
+
+    <div class="card card-footer text-muted text-center mt-auto">
+        <a href="?page=contact" class="nav-link">Contact</a>
+        <p>Copyright : Moi hehe</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
